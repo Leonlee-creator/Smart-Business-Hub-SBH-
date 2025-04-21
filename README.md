@@ -24,8 +24,6 @@ Smart Business Hub is an AI-powered Streamlit web app designed to help aspiring 
 
 ![screenshot](preview-image.png)
 
-> *More screenshots can be added here.*
-
 ## 🛠️ Installation
 
 1. Clone the repo:
