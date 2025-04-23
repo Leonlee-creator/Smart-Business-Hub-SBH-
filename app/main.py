@@ -2,6 +2,26 @@ import streamlit as st
 from generator import generate_business_idea
 from analyzer import analyze_market
 from style import set_page_style
+from fastapi import APIRouter, Request
+from pydantic import BaseModel
+from app.llama_chat import ask_mistral
+from fastapi import FastAPI
+from routes import chat  # assuming routes/chat.py
+
+app = FastAPI()
+app.include_router(chat.router)
+
+
+router = APIRouter()
+
+class Prompt(BaseModel):
+    prompt: str
+
+@router.post("/chat")
+async def chat(prompt_data: Prompt):
+    response = ask_mistral(prompt_data.prompt)
+    return {"response": response}
+
 
 # Set page config and style
 st.set_page_config(page_title="Smart Business Hub", page_icon="📊", layout="wide")
